@@ -23,10 +23,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #111;
+            background: #0b1b2b;
             color: #fff;
             margin: 0;
             padding: 20px;
+            overflow-x: hidden;
         }
         header {
             text-align: center;
@@ -37,41 +38,85 @@
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 10px;
+            position: relative;
+            z-index: 10;
         }
-        .post h2 {
-            margin-top: 0;
-        }
-
-        /* FIXED IMAGE SIZE */
         .post img {
             width: 100%;
-            max-width: 300px; /* change this number to resize image */
+            max-width: 300px;
             display: block;
             margin: 15px auto;
             border-radius: 10px;
         }
 
-        a {
-            color: #4db8ff;
+        /* Snow blog box */
+        .blog-box {
+            position: relative;
+            z-index: 10;
+            margin: 60px auto;
+            width: 350px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(6px);
+            text-align: center;
+        }
+
+        /* Snowflakes */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            animation: fall linear infinite;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(110vh); }
+        }
+
+        /* Snow toggle button */
+        #snowToggle {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.35);
+            backdrop-filter: blur(6px);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 9999;
+            transition: 0.2s;
+            user-select: none;
+        }
+        #snowToggle:hover {
+            background: rgba(255,255,255,0.55);
         }
     </style>
 </head>
 
 <body>
+
+    <!-- Snow Toggle Button -->
+    <div id="snowToggle">❄</div>
+
     <header>
         <h1>BentleyPlayz BLOGS</h1>
         <p>Welcome to the official Bentley Playz blog page!</p>
     </header>
-<article class="blog-post">
-  <header>
-<div class="post">
-    <h2>Welcome to the First Ever Bentley Playz Blog!</h2>
-    <p>hey everyone! welcome to the very first bentley playz blog post! i'm super excited to start posting here. expect new updates every single day, except saturday and sunday, and everything will be posted in eastern standard time. this is just the beginning, so get ready for lots of fun stuff coming your way!</p>
-    <p><em>Posted on: 11/14/25</em></p>
-</div>
 
-      <div class="post">
-   
+    <!-- POSTS -->
+
+    <div class="post">
+        <h2>Welcome to the First Ever Bentley Playz Blog!</h2>
+        <p>hey everyone! welcome to the very first bentley playz blog post! i'm super excited to start posting here. expect new updates every single day, except saturday and sunday, and everything will be posted in eastern standard time. this is just the beginning, so get ready for lots of fun stuff coming your way!</p>
+        <p><em>Posted on: 11/14/25</em></p>
+    </div>
+
     <div class="post">
         <h2>Gracie Did My Hair!</h2>
         <p>today this girl named gracie did my hair its so fab</p>
@@ -79,31 +124,78 @@
         <img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/IMG_8357%20(1).jpg" alt="Hair photo">
     </div>
 
+    <div class="post">
+        <h2>Dream of My Old School</h2>
+        <p>Today I had a dream I was at my old school. Remember Olivia, Maddie, and Kayleigh — you will never be forgotten.</p>
+        <p><em>Posted on: 11/17/25</em></p>
+    </div>
 
-           <h2>Dream of My Old School</h2>
-    <p>Today I had a dream I was at my old school. Remember Olivia, Maddie, and Kayleigh — you will never be forgotten.</p>
-    <p><em>Posted on: 11/17/25</em></p>
-</div>
-              <h2>11/18/25</h2>
-    <p>finally got Olivia you rule olivia</p>
-    <p><em>Posted on: 11/18/25</em></p>
-</div>
-<div class="post">
-    <h2>Gracie Braclets</h2>
-    <p>Check out this awesome picture totally love the braclets Gracie!</p>
+    <div class="post">
+        <h2>11/18/25</h2>
+        <p>finally got Olivia you rule olivia</p>
+        <p><em>Posted on: 11/18/25</em></p>
+    </div>
+
+    <div class="post">
+        <h2>Gracie Braclets</h2>
+        <p>Check out this awesome picture totally love the braclets Gracie!</p>
         <p>ALL CREDITS TO GRACIE</p>
-    <p><em>Posted on: 11/19/25</em></p>
-<img src="https://raw.githubusercontent.com/bentleyplayz/blog/466e3344c659a9df81acfbc339ee8fbf29df7f0a/image.000000.jpg" 
-     alt="Blog image" width="500">
+        <p><em>Posted on: 11/19/25</em></p>
+        <img src="https://raw.githubusercontent.com/bentleyplayz/blog/466e3344c659a9df81acfbc339ee8fbf29df7f0a/image.000000.jpg" alt="Blog image">
+    </div>
 
+    <!-- December Snow Box -->
+    <div class="blog-box">
+        <h2>New Month Magic!</h2>
+        <p>December is finally here and I’m wondering if we’ll get a white Christmas!</p>
+    </div>
 
-
-
-    <!-- Placeholder older posts -->
     <div class="post">
         <h2>More Content Coming Soon!</h2>
         <p>Stay tuned for updates, announcements, stories, and more from Bentley Playz.</p>
     </div>
+
+    <!-- SNOW SCRIPT -->
+    <script>
+        let snowEnabled = true;
+        let snowflakes = [];
+
+        function startSnow() {
+            stopSnow();
+            for (let i = 0; i < 60; i++) {
+                let flake = document.createElement("div");
+                flake.className = "snowflake";
+                flake.innerHTML = "❄";
+                flake.style.left = Math.random() * 100 + "vw";
+                flake.style.animationDuration = 4 + Math.random() * 6 + "s";
+                flake.style.fontSize = 10 + Math.random() * 20 + "px";
+
+                document.body.appendChild(flake);
+                snowflakes.push(flake);
+            }
+        }
+
+        function stopSnow() {
+            snowflakes.forEach(flake => flake.remove());
+            snowflakes = [];
+        }
+
+        // toggle button
+        document.getElementById("snowToggle").addEventListener("click", () => {
+            snowEnabled = !snowEnabled;
+
+            if (snowEnabled) {
+                startSnow();
+                document.getElementById("snowToggle").style.background = "rgba(255,255,255,0.35)";
+            } else {
+                stopSnow();
+                document.getElementById("snowToggle").style.background = "rgba(255,255,255,0.15)";
+            }
+        });
+
+        // start snow ON by default
+        startSnow();
+    </script>
 
 </body>
 </html>
