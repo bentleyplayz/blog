@@ -1,217 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="BentleyPlayz BLOGS">
-    <meta property="og:description" content="Read the latest posts, updates, and content from Bentley Playz!">
-    <meta property="og:image" content="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/IMG_8357%20(1).jpg">
-    <meta property="og:url" content="https://blogs.bentleyplayz.com">
-    <meta property="og:type" content="website">
+<meta name="description" content="Read the latest posts, updates, and content from Bentley Playz!">
 
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="BentleyPlayz BLOGS">
-    <meta name="twitter:description" content="Read the latest posts, updates, and content from Bentley Playz!">
-    <meta name="twitter:image" content="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/IMG_8357%20(1).jpg">
-    <meta name="twitter:url" content="https://blogs.bentleyplayz.com">
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="BentleyPlayz BLOGS">
+<meta property="og:description" content="Read the latest posts, updates, and content from Bentley Playz!">
+<meta property="og:image" content="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/main/IMG_8357.jpg">
+<meta property="og:url" content="https://blogs.bentleyplayz.com">
+<meta property="og:type" content="website">
 
-    
-    <link rel="icon" href="https://iili.io/FPOEjgS.md.jpg" type="image/jpeg">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BentleyPlayz BLOGS">
+<meta name="twitter:description" content="Read the latest posts, updates, and content from Bentley Playz!">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/main/IMG_8357.jpg">
 
-    <title>BentleyPlayz BLOGS</title>
+<title>BentleyPlayz BLOGS</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0b1b2b;
-            color: #fff;
-            margin: 0;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .post {
-            background: #1a1a1a;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            position: relative;
-            z-index: 10;
-        }
-        .post img {
-            width: 100%;
-            max-width: 300px;
-            display: block;
-            margin: 15px auto;
-            border-radius: 10px;
-        }
+<style>
+:root {
+    --bg-color: #0b1b2b;
+    --text-color: #ffffff;
+    --post-bg: #1a1a1a;
+}
 
-        /* Snow blog box */
-        .blog-box {
-            position: relative;
-            z-index: 10;
-            margin: 60px auto;
-            width: 350px;
-            padding: 20px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 12px;
-            backdrop-filter: blur(6px);
-            text-align: center;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    transition: 0.3s;
+}
 
-        /* Snowflakes */
-        .snowflake {
-            position: fixed;
-            top: -10px;
-            color: white;
-            font-size: 1em;
-            animation: fall linear infinite;
-            opacity: 0.8;
-            pointer-events: none;
-        }
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-        @keyframes fall {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(110vh); }
-        }
+.post {
+    background: var(--post-bg);
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 700px;
+    transition: 0.3s;
+}
 
-        /* Snow toggle button */
-        #snowToggle {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: rgba(255,255,255,0.35);
-            backdrop-filter: blur(6px);
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 9999;
-            transition: 0.2s;
-            user-select: none;
-        }
-        #snowToggle:hover {
-            background: rgba(255,255,255,0.55);
-        }
-    </style>
+.post img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 10px;
+}
+
+a {
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.blog-box {
+    margin: 60px auto;
+    max-width: 400px;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Buttons */
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    background: rgba(255,255,255,0.3);
+    user-select: none;
+}
+
+#snowToggle { right: 15px; }
+#themeToggle { right: 70px; }
+
+/* Snow */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(110vh); }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- Snow Toggle Button -->
-    <div id="snowToggle">❄</div>
+<div id="themeToggle" class="toggle-btn">🌙</div>
+<div id="snowToggle" class="toggle-btn">❄</div>
 
-    <header>
-        <h1>BentleyPlayz BLOGS</h1>
-        <p>Welcome to the official Bentley Playz blog page!</p>
-    </header>
+<header>
+<h1>BentleyPlayz BLOGS</h1>
+<p>Welcome to the official Bentley Playz blog page!</p>
+</header>
 
-    <!-- POSTS -->
+<!-- ALL BLOG POSTS -->
 
-    <div class="post">
-        <h2>Welcome to the First Ever Bentley Playz Blog!</h2>
-        <p>hey everyone! welcome to the very first bentley playz blog post! i'm super excited to start posting here. expect new updates every single day, except saturday and sunday, and everything will be posted in eastern standard time. this is just the beginning, so get ready for lots of fun stuff coming your way! UPDATE: we post whenever but try as often as we can</p>
-        <p><em>Posted on: 11/14/25</em></p>
-    </div>
-
-    <div class="post">
-        <h2>Gracie Did My Hair!</h2>
-        <p>today this girl named gracie did my hair its so fab</p>
-        <p><em>Posted on: 11/14/25</em></p>
-        <img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/IMG_8357%20(1).jpg" alt="Hair photo">
-    </div>
-
-    <div class="post">
-        <h2>Dream of My Old School</h2>
-        <p>Today I had a dream I was at my old school. Remember Olivia, Maddie, and Kayleigh — you will never be forgotten.</p>
-        <p><em>Posted on: 11/17/25</em></p>
-    </div>
-
-    <div class="post">
-        <h2>11/18/25</h2>
-        <p>finally got Olivia you rule olivia</p>
-        <p><em>Posted on: 11/18/25</em></p>
-    </div>
-
-    <div class="post">
-        <h2>Gracie Braclets</h2>
-        <p>Check out this awesome picture totally love the braclets Gracie!</p>
-        <p>ALL CREDITS TO GRACIE</p>
-        <p><em>Posted on: 11/19/25</em></p>
-        <img src="https://raw.githubusercontent.com/bentleyplayz/blog/466e3344c659a9df81acfbc339ee8fbf29df7f0a/image.000000.jpg" alt="Blog image">
-    </div>
-
-    <!-- December Snow Box -->
-    <div class="blog-box">
-        <h2>New Month Magic!</h2>
-        <p>December is finally here and I’m wondering if we’ll get a white Christmas!</p>
-        <p><small style="color: #ffa500 ; font-style: italic;">CREDITS TO CHATGPT</small></p>
-
-    </div>
 <div class="post">
-    <h2>Hello Everyone!</h2>
-    <p>It’s been 3 months and some changes have happened. Firstly, a family member went to the hospital and is now fine, but I had to stay away from home for about 2 weeks.</p>
-    <p>Secondly, I bought a nightclub in Grand Theft Auto 5 and I’m earning lots of money! By the way, if you’re on PlayStation, add me to play GTA 5 — <strong>BentleyFornite2</strong>.</p>
-    <p>Lastly, my cousin made a YouTube channel you should check it out: 
-        <a href="https://www.youtube.com/@Hunterkid-c4w" target="_blank" style="color: #00ffff; font-weight: bold;">
-            Hunterkid-c4w
-        </a>
-    </p>
-    <p><em>Posted on: 02/11/26</em></p>
+<h2>Welcome to the First Ever Bentley Playz Blog!</h2>
+<p>hey everyone! welcome to the very first bentley playz blog post! i'm super excited to start posting here. expect new updates every single day, except saturday and sunday, and everything will be posted in eastern standard time. this is just the beginning, so get ready for lots of fun stuff coming your way! UPDATE: we post whenever but try as often as we can</p>
+<p><em>Posted on: 11/14/25</em></p>
 </div>
 
-    <div class="post">
-        <h2>More Content Coming Soon!</h2>
-        <p>Stay tuned for updates, announcements, stories, and more from Bentley Playz.</p>
-    </div>
+<div class="post">
+<h2>Gracie Did My Hair!</h2>
+<p>today this girl named gracie did my hair its so fab</p>
+<p><em>Posted on: 11/14/25</em></p>
+<img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/IMG_8357%20(1).jpg" alt="Hair photo">
+</div>
 
-    <!-- SNOW SCRIPT -->
-    <script>
-        let snowEnabled = true;
-        let snowflakes = [];
+<div class="post">
+<h2>Dream of My Old School</h2>
+<p>Today I had a dream I was at my old school. Remember Olivia, Maddie, and Kayleigh — you will never be forgotten.</p>
+<p><em>Posted on: 11/17/25</em></p>
+</div>
 
-        function startSnow() {
-            stopSnow();
-            for (let i = 0; i < 60; i++) {
-                let flake = document.createElement("div");
-                flake.className = "snowflake";
-                flake.innerHTML = "❄";
-                flake.style.left = Math.random() * 100 + "vw";
-                flake.style.animationDuration = 4 + Math.random() * 6 + "s";
-                flake.style.fontSize = 10 + Math.random() * 20 + "px";
+<div class="post">
+<h2>Olivia Update</h2>
+<p>finally got Olivia you rule olivia</p>
+<p><em>Posted on: 11/18/25</em></p>
+</div>
 
-                document.body.appendChild(flake);
-                snowflakes.push(flake);
-            }
-        }
+<div class="post">
+<h2>Gracie Bracelets</h2>
+<p>Check out this awesome picture totally love the braclets Gracie!<br>ALL CREDITS TO GRACIE</p>
+<p><em>Posted on: 11/19/25</em></p>
+<img src="https://raw.githubusercontent.com/bentleyplayz/blog/466e3344c659a9df81acfbc339ee8fbf29df7f0a/image.000000.jpg" alt="Bracelets photo">
+</div>
 
-        function stopSnow() {
-            snowflakes.forEach(flake => flake.remove());
-            snowflakes = [];
-        }
+<div class="post">
+<h2>New Month Magic!</h2>
+<p>December is finally here and I’m wondering if we’ll get a white Christmas!<br>CREDITS TO CHATGPT</p>
+<p><em>Posted on: 12/01/25</em></p>
+</div>
 
-        // toggle button
-        document.getElementById("snowToggle").addEventListener("click", () => {
-            snowEnabled = !snowEnabled;
+<div class="post">
+<h2>Hello Everyone!</h2>
+<p>It’s been 3 months and some changes have happened. Firstly, a family member went to the hospital and is now fine, but I had to stay away from home for about 2 weeks.</p>
+<p>Secondly, I bought a nightclub in Grand Theft Auto 5 and I’m earning lots of money! If you’re on PlayStation, add me — BentleyFornite2.</p>
+<p>Lastly, my cousin made a YouTube channel you should check it out: <a href="https://www.youtube.com/@Hunterkid-c4w" target="_blank" rel="noopener noreferrer">Hunterkid-c4w</a></p>
+<p><em>Posted on: 02/11/26</em></p>
+</div>
 
-            if (snowEnabled) {
-                startSnow();
-                document.getElementById("snowToggle").style.background = "rgba(255,255,255,0.35)";
-            } else {
-                stopSnow();
-                document.getElementById("snowToggle").style.background = "rgba(255,255,255,0.15)";
-            }
-        });
+<div class="post">
+<h2>More Content Coming Soon!</h2>
+<p>Stay tuned for updates, announcements, stories, and more from Bentley Playz.</p>
+<p><em>Posted on: TBD</em></p>
+</div>
 
-        // start snow ON by default
-        startSnow();
-    </script>
+<script>
+// SNOW
+let snowEnabled = true;
+let snowflakes = [];
+
+function startSnow() {
+    stopSnow();
+    for (let i = 0; i < 50; i++) {
+        let flake = document.createElement("div");
+        flake.className = "snowflake";
+        flake.innerHTML = "❄";
+        flake.style.left = Math.random() * 100 + "vw";
+        flake.style.animationDuration = 4 + Math.random() * 6 + "s";
+        document.body.appendChild(flake);
+        snowflakes.push(flake);
+    }
+}
+
+function stopSnow() {
+    snowflakes.forEach(flake => flake.remove());
+    snowflakes = [];
+}
+
+document.getElementById("snowToggle").onclick = () => {
+    snowEnabled = !snowEnabled;
+    snowEnabled ? startSnow() : stopSnow();
+};
+
+startSnow();
+
+// DARK / LIGHT MODE
+let darkMode = true;
+
+document.getElementById("themeToggle").onclick = () => {
+    darkMode = !darkMode;
+
+    if (!darkMode) {
+        document.documentElement.style.setProperty('--bg-color', '#f4f4f4');
+        document.documentElement.style.setProperty('--text-color', '#111');
+        document.documentElement.style.setProperty('--post-bg', '#ffffff');
+        document.getElementById("themeToggle").innerHTML = "☀️";
+    } else {
+        document.documentElement.style.setProperty('--bg-color', '#0b1b2b');
+        document.documentElement.style.setProperty('--text-color', '#ffffff');
+        document.documentElement.style.setProperty('--post-bg', '#1a1a1a');
+        document.getElementById("themeToggle").innerHTML = "🌙";
+    }
+};
+</script>
 
 </body>
 </html>
