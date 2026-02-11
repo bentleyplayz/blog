@@ -6,12 +6,14 @@
 
 <meta name="description" content="Read the latest posts, updates, and content from Bentley Playz!">
 
+<!-- Open Graph / Facebook -->
 <meta property="og:title" content="BentleyPlayz BLOGS">
 <meta property="og:description" content="Read the latest posts, updates, and content from Bentley Playz!">
 <meta property="og:image" content="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/main/IMG_8357.jpg">
 <meta property="og:url" content="https://blogs.bentleyplayz.com">
 <meta property="og:type" content="website">
 
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BentleyPlayz BLOGS">
 <meta name="twitter:description" content="Read the latest posts, updates, and content from Bentley Playz!">
@@ -20,12 +22,19 @@
 <title>BentleyPlayz BLOGS</title>
 
 <style>
+:root {
+    --bg-color: #0b1b2b;
+    --text-color: #ffffff;
+    --post-bg: #1a1a1a;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background: #0b1b2b;
-    color: #fff;
+    background: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 20px;
+    transition: 0.3s;
 }
 
 header {
@@ -34,17 +43,12 @@ header {
 }
 
 .post {
-    background: #1a1a1a;
+    background: var(--post-bg);
     padding: 20px;
     margin: 20px auto;
     border-radius: 12px;
     max-width: 700px;
-    transition: 0.2s;
-}
-
-.post:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: 0.3s;
 }
 
 .post img {
@@ -55,25 +59,34 @@ header {
     border-radius: 10px;
 }
 
+a {
+    color: #00ffff;
+    font-weight: bold;
+}
+
 .blog-box {
     margin: 60px auto;
     max-width: 400px;
     padding: 20px;
     background: rgba(255,255,255,0.1);
     border-radius: 12px;
-    backdrop-filter: blur(6px);
     text-align: center;
 }
 
-a {
-    color: #00ffff;
-    font-weight: bold;
-    text-decoration: none;
+/* Buttons */
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    background: rgba(255,255,255,0.3);
+    user-select: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
+#snowToggle { right: 15px; }
+#themeToggle { right: 70px; }
 
 /* Snow */
 .snowflake {
@@ -81,7 +94,6 @@ a:hover {
     top: -10px;
     color: white;
     animation: fall linear infinite;
-    opacity: 0.8;
     pointer-events: none;
 }
 
@@ -89,30 +101,20 @@ a:hover {
     0% { transform: translateY(0); }
     100% { transform: translateY(110vh); }
 }
-
-#snowToggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    background: rgba(255,255,255,0.35);
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-size: 22px;
-    cursor: pointer;
-}
 </style>
 </head>
 
 <body>
 
-<div id="snowToggle">❄</div>
+<div id="themeToggle" class="toggle-btn">🌙</div>
+<div id="snowToggle" class="toggle-btn">❄</div>
 
 <header>
 <h1>BentleyPlayz BLOGS</h1>
 <p>Welcome to the official Bentley Playz blog page!</p>
 </header>
 
-<!-- POSTS -->
+<!-- ALL BLOG POSTS -->
 
 <div class="post">
 <h2>Welcome to the First Ever Bentley Playz Blog!</h2>
@@ -124,7 +126,7 @@ a:hover {
 <h2>Gracie Did My Hair!</h2>
 <p>today this girl named gracie did my hair its so fab</p>
 <p><em>Posted on: 11/14/25</em></p>
-<img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/main/IMG_8357.jpg" alt="Hair photo">
+<img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/IMG_8357%20(1).jpg" alt="Hair photo">
 </div>
 
 <div class="post">
@@ -134,53 +136,51 @@ a:hover {
 </div>
 
 <div class="post">
-<h2>11/18/25</h2>
+<h2>Olivia Update</h2>
 <p>finally got Olivia you rule olivia</p>
 <p><em>Posted on: 11/18/25</em></p>
 </div>
 
 <div class="post">
-<h2>Gracie Braclets</h2>
-<p>Check out this awesome picture totally love the braclets Gracie!</p>
-<p>ALL CREDITS TO GRACIE</p>
+<h2>Gracie Bracelets</h2>
+<p>Check out this awesome picture totally love the braclets Gracie!<br>ALL CREDITS TO GRACIE</p>
 <p><em>Posted on: 11/19/25</em></p>
-<img src="https://raw.githubusercontent.com/bentleyplayz/blog/466e3344c659a9df81acfbc339ee8fbf29df7f0a/image.000000.jpg" alt="Blog image">
+<img src="https://raw.githubusercontent.com/bentleyplayz/blog/466e3344c659a9df81acfbc339ee8fbf29df7f0a/image.000000.jpg" alt="Bracelets photo">
 </div>
 
-<div class="blog-box">
+<div class="post">
 <h2>New Month Magic!</h2>
-<p>December is finally here and I’m wondering if we’ll get a white Christmas!</p>
-<p><small style="color:#ffa500;font-style:italic;">CREDITS TO CHATGPT</small></p>
+<p>December is finally here and I’m wondering if we’ll get a white Christmas!<br>CREDITS TO CHATGPT</p>
+<p><em>Posted on: 12/01/25</em></p>
 </div>
 
 <div class="post">
 <h2>Hello Everyone!</h2>
 <p>It’s been 3 months and some changes have happened. Firstly, a family member went to the hospital and is now fine, but I had to stay away from home for about 2 weeks.</p>
-<p>Secondly, I bought a nightclub in Grand Theft Auto 5 and I’m earning lots of money! If you’re on PlayStation, add me — <strong>BentleyFornite2</strong>.</p>
-<p>Lastly, my cousin made a YouTube channel you should check it out:
-<a href="https://www.youtube.com/@Hunterkid-c4w" target="_blank" rel="noopener noreferrer">Hunterkid-c4w</a>
-</p>
+<p>Secondly, I bought a nightclub in Grand Theft Auto 5 and I’m earning lots of money! If you’re on PlayStation, add me — BentleyFornite2.</p>
+<p>Lastly, my cousin made a YouTube channel you should check it out: <a href="https://www.youtube.com/@Hunterkid-c4w" target="_blank" rel="noopener noreferrer">Hunterkid-c4w</a></p>
 <p><em>Posted on: 02/11/26</em></p>
 </div>
 
 <div class="post">
 <h2>More Content Coming Soon!</h2>
 <p>Stay tuned for updates, announcements, stories, and more from Bentley Playz.</p>
+<p><em>Posted on: TBD</em></p>
 </div>
 
 <script>
+// SNOW
 let snowEnabled = true;
 let snowflakes = [];
 
 function startSnow() {
     stopSnow();
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 50; i++) {
         let flake = document.createElement("div");
         flake.className = "snowflake";
         flake.innerHTML = "❄";
         flake.style.left = Math.random() * 100 + "vw";
         flake.style.animationDuration = 4 + Math.random() * 6 + "s";
-        flake.style.fontSize = 10 + Math.random() * 20 + "px";
         document.body.appendChild(flake);
         snowflakes.push(flake);
     }
@@ -191,12 +191,31 @@ function stopSnow() {
     snowflakes = [];
 }
 
-document.getElementById("snowToggle").addEventListener("click", () => {
+document.getElementById("snowToggle").onclick = () => {
     snowEnabled = !snowEnabled;
     snowEnabled ? startSnow() : stopSnow();
-});
+};
 
 startSnow();
+
+// DARK / LIGHT MODE
+let darkMode = true;
+
+document.getElementById("themeToggle").onclick = () => {
+    darkMode = !darkMode;
+
+    if (!darkMode) {
+        document.documentElement.style.setProperty('--bg-color', '#f4f4f4');
+        document.documentElement.style.setProperty('--text-color', '#111');
+        document.documentElement.style.setProperty('--post-bg', '#ffffff');
+        document.getElementById("themeToggle").innerHTML = "☀️";
+    } else {
+        document.documentElement.style.setProperty('--bg-color', '#0b1b2b');
+        document.documentElement.style.setProperty('--text-color', '#ffffff');
+        document.documentElement.style.setProperty('--post-bg', '#1a1a1a');
+        document.getElementById("themeToggle").innerHTML = "🌙";
+    }
+};
 </script>
 
 </body>
