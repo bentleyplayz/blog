@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Read the latest posts, updates, and content from Bentley Playz!">
+
+<meta property="og:title" content="BentleyPlayz BLOGS">
+<meta property="og:description" content="Read the latest posts, updates, and content from Bentley Playz!">
+<meta property="og:image" content="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/main/IMG_8357.jpg">
+<meta property="og:url" content="https://blogs.bentleyplayz.com">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BentleyPlayz BLOGS">
+<meta name="twitter:description" content="Read the latest posts, updates, and content from Bentley Playz!">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/main/IMG_8357.jpg">
+
+<title>BentleyPlayz BLOGS</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1b2b;
+    color: #fff;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.post {
+    background: #1a1a1a;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 700px;
+    transition: 0.2s;
+}
+
+.post:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.post img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 10px;
+}
+
+.blog-box {
+    margin: 60px auto;
+    max-width: 400px;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    text-align: center;
+}
+
+a {
+    color: #00ffff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Snow */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    animation: fall linear infinite;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(110vh); }
+}
+
+#snowToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.35);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 22px;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div id="snowToggle">❄</div>
+
+<header>
+<h1>BentleyPlayz BLOGS</h1>
+<p>Welcome to the official Bentley Playz blog page!</p>
+</header>
+
+<!-- POSTS -->
+
+<div class="post">
+<h2>Welcome to the First Ever Bentley Playz Blog!</h2>
+<p>hey everyone! welcome to the very first bentley playz blog post! i'm super excited to start posting here. expect new updates every single day, except saturday and sunday, and everything will be posted in eastern standard time. this is just the beginning, so get ready for lots of fun stuff coming your way! UPDATE: we post whenever but try as often as we can</p>
+<p><em>Posted on: 11/14/25</em></p>
+</div>
+
+<div class="post">
+<h2>Gracie Did My Hair!</h2>
+<p>today this girl named gracie did my hair its so fab</p>
+<p><em>Posted on: 11/14/25</em></p>
+<img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/main/IMG_8357.jpg" alt="Hair photo">
+</div>
+
+<div class="post">
+<h2>Dream of My Old School</h2>
+<p>Today I had a dream I was at my old school. Remember Olivia, Maddie, and Kayleigh — you will never be forgotten.</p>
+<p><em>Posted on: 11/17/25</em></p>
+</div>
+
+<div class="post">
+<h2>11/18/25</h2>
+<p>finally got Olivia you rule olivia</p>
+<p><em>Posted on: 11/18/25</em></p>
+</div>
+
+<div class="post">
+<h2>Gracie Braclets</h2>
+<p>Check out this awesome picture totally love the braclets Gracie!</p>
+<p>ALL CREDITS TO GRACIE</p>
+<p><em>Posted on: 11/19/25</em></p>
+<img src="https://raw.githubusercontent.com/bentleyplayz/blog/466e3344c659a9df81acfbc339ee8fbf29df7f0a/image.000000.jpg" alt="Blog image">
+</div>
+
+<div class="blog-box">
+<h2>New Month Magic!</h2>
+<p>December is finally here and I’m wondering if we’ll get a white Christmas!</p>
+<p><small style="color:#ffa500;font-style:italic;">CREDITS TO CHATGPT</small></p>
+</div>
+
+<div class="post">
+<h2>Hello Everyone!</h2>
+<p>It’s been 3 months and some changes have happened. Firstly, a family member went to the hospital and is now fine, but I had to stay away from home for about 2 weeks.</p>
+<p>Secondly, I bought a nightclub in Grand Theft Auto 5 and I’m earning lots of money! If you’re on PlayStation, add me — <strong>BentleyFornite2</strong>.</p>
+<p>Lastly, my cousin made a YouTube channel you should check it out:
+<a href="https://www.youtube.com/@Hunterkid-c4w" target="_blank" rel="noopener noreferrer">Hunterkid-c4w</a>
+</p>
+<p><em>Posted on: 02/11/26</em></p>
+</div>
+
+<div class="post">
+<h2>More Content Coming Soon!</h2>
+<p>Stay tuned for updates, announcements, stories, and more from Bentley Playz.</p>
+</div>
+
+<script>
+let snowEnabled = true;
+let snowflakes = [];
+
+function startSnow() {
+    stopSnow();
+    for (let i = 0; i < 60; i++) {
+        let flake = document.createElement("div");
+        flake.className = "snowflake";
+        flake.innerHTML = "❄";
+        flake.style.left = Math.random() * 100 + "vw";
+        flake.style.animationDuration = 4 + Math.random() * 6 + "s";
+        flake.style.fontSize = 10 + Math.random() * 20 + "px";
+        document.body.appendChild(flake);
+        snowflakes.push(flake);
+    }
+}
+
+function stopSnow() {
+    snowflakes.forEach(flake => flake.remove());
+    snowflakes = [];
+}
+
+document.getElementById("snowToggle").addEventListener("click", () => {
+    snowEnabled = !snowEnabled;
+    snowEnabled ? startSnow() : stopSnow();
+});
+
+startSnow();
+</script>
+
+</body>
+</html>
