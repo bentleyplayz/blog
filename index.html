@@ -85,8 +85,11 @@ a {
     user-select: none;
 }
 
-#snowToggle { right: 15px; }
+/* NEW heart button (added only) */
+#heartToggle { right: 125px; }
+
 #themeToggle { right: 70px; }
+#snowToggle { right: 15px; }
 
 /* Snow */
 .snowflake {
@@ -115,6 +118,9 @@ a {
 
 <body>
 
+<!-- NEW heart toggle button added -->
+<div id="heartToggle" class="toggle-btn">💖</div>
+
 <div id="themeToggle" class="toggle-btn">🌙</div>
 <div id="snowToggle" class="toggle-btn">❄</div>
 
@@ -123,7 +129,7 @@ a {
 <p>Welcome to the official Bentley Playz blog page!</p>
 </header>
 
-<!-- ALL BLOG POSTS -->
+<!-- ALL BLOG POSTS (UNCHANGED) -->
 
 <div class="post">
 <h2>Welcome to the First Ever Bentley Playz Blog!</h2>
@@ -179,7 +185,7 @@ a {
 
 <script>
 // SNOW
-let snowEnabled = false; // OFF by default
+let snowEnabled = false;
 let snowflakes = [];
 
 function startSnow() {
@@ -205,10 +211,11 @@ document.getElementById("snowToggle").onclick = () => {
     snowEnabled ? startSnow() : stopSnow();
 };
 
-// Only start if enabled
 if (snowEnabled) startSnow();
 
-// VALENTINES HEARTS (AUTO ON)
+
+// HEARTS
+let heartsEnabled = true; // still auto on
 let hearts = [];
 
 function startHearts() {
@@ -229,8 +236,14 @@ function stopHearts() {
     hearts = [];
 }
 
-// Start hearts automatically
-startHearts();
+// NEW toggle functionality added
+document.getElementById("heartToggle").onclick = () => {
+    heartsEnabled = !heartsEnabled;
+    heartsEnabled ? startHearts() : stopHearts();
+};
+
+if (heartsEnabled) startHearts();
+
 
 // DARK / LIGHT MODE
 let darkMode = true;
