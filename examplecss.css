@@ -1,1 +1,97 @@
+:root {
+    --bg-color: #0b1b2b;
+    --text-color: #ffffff;
+    --post-bg: #1a1a1a;
+}
 
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.post {
+    background: var(--post-bg);
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 700px;
+    transition: 0.3s;
+}
+
+.post img {
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 15px auto;
+    border-radius: 10px;
+}
+
+a {
+    color: #00ffff;
+    font-weight: bold;
+}
+
+.blog-box {
+    margin: 60px auto;
+    max-width: 400px;
+    padding: 20px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Toggle Buttons */
+.toggle-btn {
+    position: fixed;
+    top: 15px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    background: rgba(255,255,255,0.3);
+    user-select: none;
+}
+
+/* Button Positions */
+#treeToggle { right: 180px; }
+#heartToggle { right: 125px; }
+#themeToggle { right: 70px; }
+#snowToggle { right: 15px; }
+
+/* Seasonal Effects */
+.snowflake,
+.tree,
+.heart {
+    position: fixed;
+    top: -10px;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+
+.snowflake {
+    color: white;
+    font-size: 18px;
+}
+
+.tree {
+    font-size: 24px;
+}
+
+.heart {
+    font-size: 22px;
+}
+
+/* Falling Animation */
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(110vh); }
+}
