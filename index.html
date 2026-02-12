@@ -29,81 +29,58 @@
 }
 
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background-color: var(--bg-color);
+    background: var(--bg-color);
     color: var(--text-color);
-    transition: background-color 0.3s, color 0.3s;
+    margin: 0;
+    padding: 20px;
+    transition: 0.3s;
 }
 
 header {
     text-align: center;
-    padding: 40px 20px;
-}
-
-h1 {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .post {
     background: var(--post-bg);
-    margin: 20px auto;
     padding: 20px;
-    max-width: 800px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: background 0.3s;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 700px;
+    transition: 0.3s;
 }
 
 .post img {
-    max-width: 100%;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin: 15px auto;
     border-radius: 10px;
-    margin-top: 10px;
 }
 
 a {
-    color: #4da6ff;
+    color: #00ffff;
+    font-weight: bold;
 }
 
-/* Toggle Buttons */
 .toggle-btn {
     position: fixed;
     top: 15px;
-    right: 15px;
-    background: var(--post-bg);
-    padding: 10px;
-    margin-left: 5px;
-    border-radius: 50%;
+    padding: 10px 14px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    font-size: 18px;
+    background: rgba(255,255,255,0.3);
     user-select: none;
+    z-index: 1000;
 }
 
-#snowToggle { right: 70px; }
-#treeToggle { right: 125px; }
-#heartToggle { right: 180px; }
-
-/* Snowflakes */
+/* Snow */
 .snowflake {
     position: fixed;
     top: -10px;
-    font-size: 20px;
-    animation: fall linear infinite;
-    pointer-events: none;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh);
-    }
-}
-
-/* Trees */
-.tree {
-    position: fixed;
-    top: -10px;
-    font-size: 22px;
+    color: white;
     animation: fall linear infinite;
     pointer-events: none;
 }
@@ -116,14 +93,35 @@ a {
     animation: fall linear infinite;
     pointer-events: none;
 }
+
+/* Trees */
+.tree {
+    position: fixed;
+    top: -10px;
+    font-size: 22px;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(110vh); }
+}
+
+/* Mobile tweaks */
+@media(max-width:600px){
+    body { padding: 10px; }
+    .post { margin: 15px 10px; padding: 15px; }
+    .post img { max-width: 100%; }
+}
 </style>
-
 </head>
-
 <body>
 
+<!-- Seasonal Toggle Buttons (hidden by default) -->
 <div id="treeToggle" class="toggle-btn" style="display:none;">🎄</div>
 <div id="heartToggle" class="toggle-btn" style="display:none;">💖</div>
+
 <div id="themeToggle" class="toggle-btn">🌙</div>
 <div id="snowToggle" class="toggle-btn">❄</div>
 
@@ -132,8 +130,7 @@ a {
 <p>Welcome to the official Bentley Playz blog page!</p>
 </header>
 
-<!-- BLOG POSTS (UNCHANGED) -->
-
+<!-- BLOG POSTS -->
 <div class="post">
 <h2>Welcome to the First Ever Bentley Playz Blog!</h2>
 <p>hey everyone! welcome to the very first bentley playz blog post! i'm super excited to start posting here. expect new updates every single day, except saturday and sunday, and everything will be posted in eastern standard time. this is just the beginning, so get ready for lots of fun stuff coming your way! UPDATE: we post whenever but try as often as we can</p>
@@ -187,113 +184,81 @@ a {
 </div>
 
 <script>
-// (YOUR ORIGINAL JS — UNCHANGED)
+// DATE CHECK
 const today = new Date();
 const month = today.getMonth() + 1;
 const day = today.getDate();
 const year = today.getFullYear();
 
+// Helper function to reposition visible toggle buttons
+function positionToggles() {
+    const buttons = [document.getElementById("treeToggle"), document.getElementById("heartToggle"), document.getElementById("themeToggle"), document.getElementById("snowToggle")];
+    let offset = 15; // start 15px from right
+    buttons.forEach(btn => {
+        if (btn.style.display !== "none") {
+            btn.style.right = offset + "px";
+            offset += btn.offsetWidth + 10; // 10px gap
+        }
+    });
+}
+
+// ❄ SNOW
 let snowEnabled = false;
 let snowflakes = [];
-
 function startSnow() {
     stopSnow();
-    for (let i = 0; i < 50; i++) {
-        let flake = document.createElement("div");
-        flake.className = "snowflake";
-        flake.innerHTML = "❄";
-        flake.style.left = Math.random() * 100 + "vw";
-        flake.style.animationDuration = 4 + Math.random() * 6 + "s";
+    for(let i=0;i<50;i++){
+        let flake=document.createElement("div");
+        flake.className="snowflake";
+        flake.innerHTML="❄";
+        flake.style.left=Math.random()*100+"vw";
+        flake.style.animationDuration=(4+Math.random()*6)+"s";
         document.body.appendChild(flake);
         snowflakes.push(flake);
     }
 }
+function stopSnow(){ snowflakes.forEach(f=>f.remove()); snowflakes=[]; }
+document.getElementById("snowToggle").onclick=()=>{ snowEnabled=!snowEnabled; snowEnabled?startSnow():stopSnow(); };
 
-function stopSnow() {
-    snowflakes.forEach(flake => flake.remove());
-    snowflakes = [];
+// 🎄 TREES
+let trees=[],treesEnabled=false;
+function startTrees(){ stopTrees(); for(let i=0;i<30;i++){ let t=document.createElement("div"); t.className="tree"; t.innerHTML="🎄"; t.style.left=Math.random()*100+"vw"; t.style.animationDuration=(5+Math.random()*5)+"s"; document.body.appendChild(t); trees.push(t); } }
+function stopTrees(){ trees.forEach(t=>t.remove()); trees=[]; }
+if(month===12 && day===25){
+    const treeBtn=document.getElementById("treeToggle");
+    treeBtn.style.display="block";
+    treeBtn.onclick=()=>{ treesEnabled=!treesEnabled; treesEnabled?startTrees():stopTrees(); positionToggles(); }
 }
 
-document.getElementById("snowToggle").onclick = () => {
-    snowEnabled = !snowEnabled;
-    snowEnabled ? startSnow() : stopSnow();
-};
-
-let trees = [];
-let treesEnabled = false;
-
-function startTrees() {
-    stopTrees();
-    for (let i = 0; i < 30; i++) {
-        let tree = document.createElement("div");
-        tree.className = "tree";
-        tree.innerHTML = "🎄";
-        tree.style.left = Math.random() * 100 + "vw";
-        tree.style.animationDuration = 5 + Math.random() * 5 + "s";
-        document.body.appendChild(tree);
-        trees.push(tree);
-    }
+// ❤️ HEARTS
+let hearts=[],heartsEnabled=false;
+function startHearts(){ stopHearts(); for(let i=0;i<40;i++){ let h=document.createElement("div"); h.className="heart"; h.innerHTML="💖"; h.style.left=Math.random()*100+"vw"; h.style.animationDuration=(4+Math.random()*6)+"s"; document.body.appendChild(h); hearts.push(h); } }
+function stopHearts(){ hearts.forEach(h=>h.remove()); hearts=[]; }
+if(year===2026 && month===2 && day>=12 && day<=14){
+    const heartBtn=document.getElementById("heartToggle");
+    heartBtn.style.display="block";
+    heartBtn.onclick=()=>{ heartsEnabled=!heartsEnabled; heartsEnabled?startHearts():stopHearts(); positionToggles(); }
 }
 
-function stopTrees() {
-    trees.forEach(tree => tree.remove());
-    trees = [];
-}
-
-if (month === 12 && day === 25) {
-    document.getElementById("treeToggle").style.display = "block";
-    document.getElementById("treeToggle").onclick = () => {
-        treesEnabled = !treesEnabled;
-        treesEnabled ? startTrees() : stopTrees();
-    };
-}
-
-let hearts = [];
-let heartsEnabled = false;
-
-function startHearts() {
-    stopHearts();
-    for (let i = 0; i < 40; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "💖";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = 4 + Math.random() * 6 + "s";
-        document.body.appendChild(heart);
-        hearts.push(heart);
-    }
-}
-
-function stopHearts() {
-    hearts.forEach(heart => heart.remove());
-    hearts = [];
-}
-
-if (year === 2026 && month === 2 && day >= 12 && day <= 14) {
-    document.getElementById("heartToggle").style.display = "block";
-    document.getElementById("heartToggle").onclick = () => {
-        heartsEnabled = !heartsEnabled;
-        heartsEnabled ? startHearts() : stopHearts();
-    };
-}
-
-let darkMode = true;
-
-document.getElementById("themeToggle").onclick = () => {
-    darkMode = !darkMode;
-
-    if (!darkMode) {
-        document.documentElement.style.setProperty('--bg-color', '#f4f4f4');
-        document.documentElement.style.setProperty('--text-color', '#111');
-        document.documentElement.style.setProperty('--post-bg', '#ffffff');
-        document.getElementById("themeToggle").innerHTML = "☀️";
+// 🌙 DARK MODE
+let darkMode=true;
+document.getElementById("themeToggle").onclick=()=>{
+    darkMode=!darkMode;
+    if(!darkMode){
+        document.documentElement.style.setProperty('--bg-color','#f4f4f4');
+        document.documentElement.style.setProperty('--text-color','#111');
+        document.documentElement.style.setProperty('--post-bg','#ffffff');
+        document.getElementById("themeToggle").innerHTML="☀️";
     } else {
-        document.documentElement.style.setProperty('--bg-color', '#0b1b2b');
-        document.documentElement.style.setProperty('--text-color', '#ffffff');
-        document.documentElement.style.setProperty('--post-bg', '#1a1a1a');
-        document.getElementById("themeToggle").innerHTML = "🌙";
+        document.documentElement.style.setProperty('--bg-color','#0b1b2b');
+        document.documentElement.style.setProperty('--text-color','#ffffff');
+        document.documentElement.style.setProperty('--post-bg','#1a1a1a');
+        document.getElementById("themeToggle").innerHTML="🌙";
     }
 };
+
+// Position toggles initially
+positionToggles();
 </script>
 
 </body>
