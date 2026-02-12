@@ -257,9 +257,12 @@ document.addEventListener("keydown", (e)=>{
     }
 });
 
+
 // Initialize seasonal buttons for real dates
-if(month===12 && day===25) initTreeButton();
-if(year===2026 && month===2 && day>=12 && day<=14) initHeartButton();
+if(month===12 && day===25) initTreeButton();                        // Christmas
+if(month===2 && day>=12 && day<=14) initHeartButton();              // Valentines
+if(month===11 && day===26) initTurkeyButton();                       // Thanksgiving
+
 
 // 🍂 Thanksgiving: 4th Thursday of Nov
 (function(){
