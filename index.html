@@ -21,105 +21,16 @@
 
 <title>BentleyPlayz BLOGS</title>
 
-<style>
-:root {
-    --bg-color: #0b1b2b;
-    --text-color: #ffffff;
-    --post-bg: #1a1a1a;
-}
+<!-- External CSS -->
+<link rel="stylesheet" href="https://bentleyplayz.com/examplecss.css">
 
-body {
-    font-family: Arial, sans-serif;
-    background: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 20px;
-    transition: 0.3s;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.post {
-    background: var(--post-bg);
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 12px;
-    max-width: 700px;
-    transition: 0.3s;
-}
-
-.post img {
-    width: 100%;
-    max-width: 400px;
-    display: block;
-    margin: 15px auto;
-    border-radius: 10px;
-}
-
-a {
-    color: #00ffff;
-    font-weight: bold;
-}
-
-.blog-box {
-    margin: 60px auto;
-    max-width: 400px;
-    padding: 20px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 12px;
-    text-align: center;
-}
-
-/* Buttons */
-.toggle-btn {
-    position: fixed;
-    top: 15px;
-    padding: 10px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    background: rgba(255,255,255,0.3);
-    user-select: none;
-}
-
-/* NEW heart button (added only) */
-#heartToggle { right: 125px; }
-
-#themeToggle { right: 70px; }
-#snowToggle { right: 15px; }
-
-/* Snow */
-.snowflake {
-    position: fixed;
-    top: -10px;
-    color: white;
-    animation: fall linear infinite;
-    pointer-events: none;
-}
-
-/* Hearts */
-.heart {
-    position: fixed;
-    top: -10px;
-    font-size: 22px;
-    animation: fall linear infinite;
-    pointer-events: none;
-}
-
-@keyframes fall {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(110vh); }
-}
-</style>
 </head>
 
 <body>
 
-<!-- NEW heart toggle button added -->
-<div id="heartToggle" class="toggle-btn">💖</div>
+<!-- Seasonal Toggle Buttons (hidden by default) -->
+<div id="treeToggle" class="toggle-btn" style="display:none;">🎄</div>
+<div id="heartToggle" class="toggle-btn" style="display:none;">💖</div>
 
 <div id="themeToggle" class="toggle-btn">🌙</div>
 <div id="snowToggle" class="toggle-btn">❄</div>
@@ -129,7 +40,7 @@ a {
 <p>Welcome to the official Bentley Playz blog page!</p>
 </header>
 
-<!-- ALL BLOG POSTS (UNCHANGED) -->
+<!-- BLOG POSTS (UNCHANGED) -->
 
 <div class="post">
 <h2>Welcome to the First Ever Bentley Playz Blog!</h2>
@@ -184,7 +95,15 @@ a {
 </div>
 
 <script>
-// SNOW
+
+// DATE CHECK
+const today = new Date();
+const month = today.getMonth() + 1;
+const day = today.getDate();
+const year = today.getFullYear();
+
+
+// ❄ SNOW
 let snowEnabled = false;
 let snowflakes = [];
 
@@ -211,12 +130,42 @@ document.getElementById("snowToggle").onclick = () => {
     snowEnabled ? startSnow() : stopSnow();
 };
 
-if (snowEnabled) startSnow();
+
+// 🎄 CHRISTMAS TREES (Dec 25 only)
+let trees = [];
+let treesEnabled = false;
+
+function startTrees() {
+    stopTrees();
+    for (let i = 0; i < 30; i++) {
+        let tree = document.createElement("div");
+        tree.className = "tree";
+        tree.innerHTML = "🎄";
+        tree.style.left = Math.random() * 100 + "vw";
+        tree.style.animationDuration = 5 + Math.random() * 5 + "s";
+        document.body.appendChild(tree);
+        trees.push(tree);
+    }
+}
+
+function stopTrees() {
+    trees.forEach(tree => tree.remove());
+    trees = [];
+}
+
+if (month === 12 && day === 25) {
+    document.getElementById("treeToggle").style.display = "block";
+
+    document.getElementById("treeToggle").onclick = () => {
+        treesEnabled = !treesEnabled;
+        treesEnabled ? startTrees() : stopTrees();
+    };
+}
 
 
-// HEARTS
-let heartsEnabled = true; // still auto on
+// 💖 VALENTINES (Feb 12–14, 2026 only)
 let hearts = [];
+let heartsEnabled = false;
 
 function startHearts() {
     stopHearts();
@@ -236,16 +185,17 @@ function stopHearts() {
     hearts = [];
 }
 
-// NEW toggle functionality added
-document.getElementById("heartToggle").onclick = () => {
-    heartsEnabled = !heartsEnabled;
-    heartsEnabled ? startHearts() : stopHearts();
-};
+if (year === 2026 && month === 2 && day >= 12 && day <= 14) {
+    document.getElementById("heartToggle").style.display = "block";
 
-if (heartsEnabled) startHearts();
+    document.getElementById("heartToggle").onclick = () => {
+        heartsEnabled = !heartsEnabled;
+        heartsEnabled ? startHearts() : stopHearts();
+    };
+}
 
 
-// DARK / LIGHT MODE
+// 🌙 DARK MODE
 let darkMode = true;
 
 document.getElementById("themeToggle").onclick = () => {
@@ -263,6 +213,7 @@ document.getElementById("themeToggle").onclick = () => {
         document.getElementById("themeToggle").innerHTML = "🌙";
     }
 };
+
 </script>
 
 </body>
