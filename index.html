@@ -235,14 +235,16 @@ function positionToggles(){
         document.getElementById("treeToggle"),
         document.getElementById("heartToggle"),
         document.getElementById("turkeyToggle"),
+        document.getElementById("cloverToggle"),   // added
+        document.getElementById("springToggle"),   // added
         document.getElementById("themeToggle"),
         document.getElementById("snowToggle")
     ];
     let offset=15;
     buttons.forEach(btn=>{
         if(btn.style.display!=="none"){
-            btn.style.right=offset+"px";
-            offset+=btn.offsetWidth+10;
+            btn.style.right = offset + "px";
+            offset += btn.offsetWidth + 10;
         }
     });
 }
