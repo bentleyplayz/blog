@@ -101,6 +101,32 @@ a {
     .post { margin: 15px 10px; padding: 15px; }
     .post img { max-width: 100%; }
 }
+/* LIGHTBOX */
+#lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+}
+
+#lightboxClose {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}    
 </style>
 </head>
 <body>
@@ -291,7 +317,33 @@ if(month===11 && day===26) initTurkeyButton();                       // Thanksgi
 
 // Position toggles initially
 positionToggles();
-</script>
+// IMAGE CLICK TO ENLARGE
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const lightboxClose = document.getElementById("lightboxClose");
 
+document.querySelectorAll(".post img").forEach(img => {
+    img.style.cursor = "pointer";
+    img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+    });
+});
+
+lightboxClose.onclick = () => {
+    lightbox.style.display = "none";
+};
+
+lightbox.onclick = (e) => {
+    if (e.target !== lightboxImg) {
+        lightbox.style.display = "none";
+    }
+};
+</script>
+<!-- Image Lightbox -->
+<div id="lightbox" style="display:none;">
+  <span id="lightboxClose">&times;</span>
+  <img id="lightboxImg">
+</div>
 </body>
 </html>
