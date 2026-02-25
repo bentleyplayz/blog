@@ -76,19 +76,23 @@ a {
     z-index: 1000;
 }
 
-/* Snow, hearts, trees, turkeys */
-.snowflake, .heart, .tree, .turkey, .clover {
+/* Snow, hearts, trees, turkeys, clovers, flowers */
+.snowflake, .heart, .tree, .turkey, .clover, .flower {
     position: fixed;
     top: -10px;
     animation: fall linear infinite;
     pointer-events: none;
 }
 
+.flower { 
+    font-size: 20px; 
+}
 .snowflake { color: white; }
 .heart { font-size: 22px; }
 .tree { font-size: 22px; }
 .turkey { font-size: 22px; }
 .clover { font-size: 22px; }
+
 
 /* Animations */
 @keyframes fall {
@@ -137,6 +141,7 @@ a {
 <div id="heartToggle" class="toggle-btn" style="display:none;">💖</div>
 <div id="turkeyToggle" class="toggle-btn" style="display:none;">🦃</div>
 <div id="cloverToggle" class="toggle-btn" style="display:none;">🍀</div>
+<div id="springToggle" class="toggle-btn" style="display:none;">🌷</div>
 <div id="themeToggle" class="toggle-btn">🌙</div>
 <div id="snowToggle" class="toggle-btn">❄</div>
 
@@ -311,6 +316,37 @@ document.getElementById("themeToggle").onclick=()=>{
         document.getElementById("themeToggle").innerHTML="🌙";
     }
 };
+// 🌸 FLOWERS (Spring)
+let flowers = [], flowersEnabled = false;
+
+function startFlowers() {
+    stopFlowers();
+    for(let i=0; i<40; i++){
+        let f = document.createElement("div");
+        f.className = "flower";
+        f.innerHTML = Math.random() > 0.5 ? "🌸" : "🌷"; // random flowers
+        f.style.left = Math.random() * 100 + "vw"; 
+        f.style.animationDuration = (4 + Math.random()*6) + "s"; 
+        f.style.transform = `rotate(${Math.random()*360}deg)`; // random rotation
+        document.body.appendChild(f);
+        flowers.push(f);
+    }
+}
+
+function stopFlowers() {
+    flowers.forEach(f => f.remove());
+    flowers = [];
+}
+
+function initFlowerButton() {
+    const flowerBtn = document.getElementById("springToggle");
+    flowerBtn.style.display = "block";
+    flowerBtn.onclick = () => {
+        flowersEnabled = !flowersEnabled;
+        flowersEnabled ? startFlowers() : stopFlowers();
+        positionToggles();
+    };
+}
 
 // DEV MODE KEYBIND: CTRL + SHIFT + D
 document.addEventListener("keydown", (e)=>{
@@ -322,11 +358,14 @@ document.addEventListener("keydown", (e)=>{
             initHeartButton();
             initTurkeyButton();
             initCloverButton(); // <-- Add this line to enable St. Patrick's Day in dev mode
+            initFlowerButton(); 
         } else {
             document.getElementById("treeToggle").style.display="none";
             document.getElementById("heartToggle").style.display="none";
             document.getElementById("turkeyToggle").style.display="none";
             document.getElementById("cloverToggle").style.display="none"; // <-- hide Clover button when dev mode off
+            document.getElementById("springToggle").style.display="none"; // Hide Spring button
+            
         }
         positionToggles();
     }
@@ -337,6 +376,9 @@ if(month===12 && day===25) initTreeButton();                        // Christmas
 if(month===2 && day>=12 && day<=14) initHeartButton();              // Valentines
 if(month===11 && day===26) initTurkeyButton();                       // Thanksgiving
 if(month===3 && day===17) initCloverButton();
+if ((month === 3 && day >= 20) || month === 4 || month === 5 || (month === 6 && day <= 20)) {
+    initFlowerButton();
+}
 
 // 🍂 Thanksgiving: 4th Thursday of Nov
 (function(){
