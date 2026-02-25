@@ -77,7 +77,7 @@ a {
 }
 
 /* Snow, hearts, trees, turkeys */
-.snowflake, .heart, .tree, .turkey {
+.snowflake, .heart, .tree, .turkey, .clover {
     position: fixed;
     top: -10px;
     animation: fall linear infinite;
@@ -88,6 +88,7 @@ a {
 .heart { font-size: 22px; }
 .tree { font-size: 22px; }
 .turkey { font-size: 22px; }
+.clover { font-size: 22px; }
 
 /* Animations */
 @keyframes fall {
@@ -135,6 +136,7 @@ a {
 <div id="treeToggle" class="toggle-btn" style="display:none;">🎄</div>
 <div id="heartToggle" class="toggle-btn" style="display:none;">💖</div>
 <div id="turkeyToggle" class="toggle-btn" style="display:none;">🦃</div>
+<div id="cloverToggle" class="toggle-btn" style="display:none;">🍀</div>
 <div id="themeToggle" class="toggle-btn">🌙</div>
 <div id="snowToggle" class="toggle-btn">❄</div>
 
@@ -263,7 +265,36 @@ let turkeys=[], turkeysEnabled=false;
 function startTurkeys(){ stopTurkeys(); for(let i=0;i<40;i++){ let t=document.createElement("div"); t.className="turkey"; t.innerHTML="🦃"; t.style.left=Math.random()*100+"vw"; t.style.animationDuration=(4+Math.random()*6)+"s"; document.body.appendChild(t); turkeys.push(t); } }
 function stopTurkeys(){ turkeys.forEach(t=>t.remove()); turkeys=[]; }
 function initTurkeyButton(){ const turkeyBtn=document.getElementById("turkeyToggle"); turkeyBtn.style.display="block"; turkeyBtn.onclick=()=>{ turkeysEnabled=!turkeysEnabled; turkeysEnabled?startTurkeys():stopTurkeys(); positionToggles(); } }
+// 🍀 CLOVERS (St. Patrick's Day)
+let clovers = [], cloversEnabled = false;
 
+function startClovers(){
+    stopClovers();
+    for(let i=0;i<40;i++){
+        let c = document.createElement("div");
+        c.className = "clover";
+        c.innerHTML = "🍀";
+        c.style.left = Math.random()*100 + "vw";
+        c.style.animationDuration = (4 + Math.random()*6) + "s";
+        document.body.appendChild(c);
+        clovers.push(c);
+    }
+}
+
+function stopClovers(){
+    clovers.forEach(c => c.remove());
+    clovers = [];
+}
+
+function initCloverButton(){
+    const cloverBtn = document.getElementById("cloverToggle");
+    cloverBtn.style.display = "block";
+    cloverBtn.onclick = () => {
+        cloversEnabled = !cloversEnabled;
+        cloversEnabled ? startClovers() : stopClovers();
+        positionToggles();
+    }
+}
 // 🌙 DARK MODE
 let darkMode=true;
 document.getElementById("themeToggle").onclick=()=>{
@@ -290,21 +321,22 @@ document.addEventListener("keydown", (e)=>{
             initTreeButton();
             initHeartButton();
             initTurkeyButton();
+            initCloverButton(); // <-- Add this line to enable St. Patrick's Day in dev mode
         } else {
             document.getElementById("treeToggle").style.display="none";
             document.getElementById("heartToggle").style.display="none";
             document.getElementById("turkeyToggle").style.display="none";
+            document.getElementById("cloverToggle").style.display="none"; // <-- hide Clover button when dev mode off
         }
         positionToggles();
     }
 });
 
-
 // Initialize seasonal buttons for real dates
 if(month===12 && day===25) initTreeButton();                        // Christmas
 if(month===2 && day>=12 && day<=14) initHeartButton();              // Valentines
 if(month===11 && day===26) initTurkeyButton();                       // Thanksgiving
-
+if(month===3 && day===17) initCloverButton();
 
 // 🍂 Thanksgiving: 4th Thursday of Nov
 (function(){
