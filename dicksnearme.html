@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dick's Near You</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    #sidebar {
+      width: 300px;
+      background: #f7f7f7;
+      overflow-y: auto;
+      padding: 15px;
+      border-right: 1px solid #ddd;
+    }
+
+    #sidebar h2 {
+      margin-top: 0;
+    }
+
+    .store {
+      padding: 10px;
+      margin-bottom: 10px;
+      background: white;
+      border-radius: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      cursor: pointer;
+    }
+
+    .store:hover {
+      background: #e9f3ff;
+    }
+
+    #map {
+      flex: 1;
+    }
+
+    .loading {
+      font-size: 14px;
+      color: #666;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      #sidebar {
+        width: 100%;
+        height: 35%;
+      }
+      #map {
+        height: 65%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="sidebar">
+  <h2>Dick's Near You</h2>
+  <div id="storeList" class="loading">Getting your location...</div>
+</div>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a =
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(lat1 * Math.PI/180) *
+    Math.cos(lat2 * Math.PI/180) *
+    Math.sin(dLon/2) * Math.sin(dLon/2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  return R * c;
+}
+
+if (navigator.geolocation) {
+
+  navigator.geolocation.getCurrentPosition(async position => {
+
+    const userLat = position.coords.latitude;
+    const userLon = position.coords.longitude;
+
+    const map = L.map('map').setView([userLat, userLon], 11);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    L.marker([userLat, userLon])
+      .addTo(map)
+      .bindPopup("You are here")
+      .openPopup();
+
+    document.getElementById("storeList").innerHTML = "Searching nearby stores...";
+
+    const query = `
+      [out:json];
+      (
+        node["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
+        way["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
+        relation["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
+      );
+      out center;
+    `;
+
+    const response = await fetch("https://overpass-api.de/api/interpreter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      body: "data=" + encodeURIComponent(query)
+    });
+
+    const data = await response.json();
+
+    if (!data.elements.length) {
+      document.getElementById("storeList").innerHTML =
+        "No Dick's Sporting Goods found within 50km.";
+      return;
+    }
+
+    const stores = data.elements.map(place => {
+      const lat = place.lat || place.center.lat;
+      const lon = place.lon || place.center.lon;
+      const distance = calculateDistance(userLat, userLon, lat, lon);
+      return { lat, lon, distance };
+    });
+
+    stores.sort((a, b) => a.distance - b.distance);
+
+    const storeListDiv = document.getElementById("storeList");
+    storeListDiv.innerHTML = "";
+
+    stores.forEach(store => {
+
+      const marker = L.marker([store.lat, store.lon])
+        .addTo(map)
+        .bindPopup(
+          `<b>Dick's Sporting Goods</b><br>${store.distance.toFixed(1)} km away`
+        );
+
+      const storeDiv = document.createElement("div");
+      storeDiv.className = "store";
+      storeDiv.innerHTML = `
+        <strong>Dick's Sporting Goods</strong><br>
+        ${store.distance.toFixed(1)} km away
+      `;
+
+      storeDiv.onclick = () => {
+        map.setView([store.lat, store.lon], 14);
+        marker.openPopup();
+      };
+
+      storeListDiv.appendChild(storeDiv);
+    });
+
+  }, () => {
+    document.getElementById("storeList").innerHTML =
+      "Location permission denied.";
+  });
+
+} else {
+  document.getElementById("storeList").innerHTML =
+    "Geolocation not supported by your browser.";
+}
+</script>
+
+</body>
+</html>
