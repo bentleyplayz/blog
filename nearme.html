@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dick's Near You</title>
+  <title>Sporting Goods Near You</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -70,7 +70,7 @@
 <body>
 
 <div id="sidebar">
-  <h2>Dick's Near You</h2>
+  <h2>Sporting Goods Near You</h2>
   <div id="storeList" class="loading">Getting your location...</div>
 </div>
 
@@ -116,9 +116,9 @@ if (navigator.geolocation) {
     const query = `
       [out:json];
       (
-        node["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
-        way["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
-        relation["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
+        node["name"="Sporting Goods"](around:50000,${userLat},${userLon});
+        way["name"="Sporting Goods"](around:50000,${userLat},${userLon});
+        relation["name"="Sporting Goods Near You"](around:50000,${userLat},${userLon});
       );
       out center;
     `;
