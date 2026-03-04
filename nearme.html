@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sporting Goods Near You</title>
+  <title>Dick's Near You</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -62,7 +62,7 @@
 <body>
 
 <div id="sidebar">
-  <h2>Sporting Goods Near You</h2>
+  <h2>Dick's Near You</h2>
   <div id="storeList" class="loading">Getting your location...</div>
 </div>
 
@@ -107,9 +107,9 @@ if (navigator.geolocation) {
     const query = `
       [out:json];
       (
-        node["shop"="sports"](around:50000,${userLat},${userLon});
-        way["shop"="sports"](around:50000,${userLat},${userLon});
-        relation["shop"="sports"](around:50000,${userLat},${userLon});
+        node["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
+        way["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
+        relation["name"="Dick's Sporting Goods"](around:50000,${userLat},${userLon});
       );
       out center;
     `;
@@ -126,16 +126,15 @@ if (navigator.geolocation) {
 
     if (!data.elements.length) {
       document.getElementById("storeList").innerHTML =
-        "No sporting goods stores found within 50km.";
+        "No Dick's Sporting Goods found within 50km.";
       return;
     }
 
     const stores = data.elements.map(place => {
       const lat = place.lat || place.center.lat;
       const lon = place.lon || place.center.lon;
-      const name = place.tags.name || "Sporting Goods Store";
       const distance = calculateDistance(userLat, userLon, lat, lon);
-      return { lat, lon, name, distance };
+      return { lat, lon, distance };
     });
 
     stores.sort((a, b) => a.distance - b.distance);
@@ -148,13 +147,13 @@ if (navigator.geolocation) {
       const marker = L.marker([store.lat, store.lon])
         .addTo(map)
         .bindPopup(
-          `<b>${store.name}</b><br>${store.distance.toFixed(1)} km away`
+          `<b>Dick's Sporting Goods</b><br>${store.distance.toFixed(1)} km away`
         );
 
       const storeDiv = document.createElement("div");
       storeDiv.className = "store";
       storeDiv.innerHTML = `
-        <strong>${store.name}</strong><br>
+        <strong>Dick's Sporting Goods</strong><br>
         ${store.distance.toFixed(1)} km away
       `;
 
