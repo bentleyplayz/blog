@@ -5,7 +5,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Leaflet CSS -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -54,16 +53,9 @@
     }
 
     @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      #sidebar {
-        width: 100%;
-        height: 35%;
-      }
-      #map {
-        height: 65%;
-      }
+      body { flex-direction: column; }
+      #sidebar { width: 100%; height: 35%; }
+      #map { height: 65%; }
     }
   </style>
 </head>
@@ -76,7 +68,6 @@
 
 <div id="map"></div>
 
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
@@ -116,9 +107,9 @@ if (navigator.geolocation) {
     const query = `
       [out:json];
       (
-        node["name"="Sporting Goods"](around:50000,${userLat},${userLon});
-        way["name"="Sporting Goods"](around:50000,${userLat},${userLon});
-        relation["name"="Sporting Goods Near You"](around:50000,${userLat},${userLon});
+        node["shop"="sports"](around:50000,${userLat},${userLon});
+        way["shop"="sports"](around:50000,${userLat},${userLon});
+        relation["shop"="sports"](around:50000,${userLat},${userLon});
       );
       out center;
     `;
@@ -135,15 +126,16 @@ if (navigator.geolocation) {
 
     if (!data.elements.length) {
       document.getElementById("storeList").innerHTML =
-        "No Dick's Sporting Goods found within 50km.";
+        "No sporting goods stores found within 50km.";
       return;
     }
 
     const stores = data.elements.map(place => {
       const lat = place.lat || place.center.lat;
       const lon = place.lon || place.center.lon;
+      const name = place.tags.name || "Sporting Goods Store";
       const distance = calculateDistance(userLat, userLon, lat, lon);
-      return { lat, lon, distance };
+      return { lat, lon, name, distance };
     });
 
     stores.sort((a, b) => a.distance - b.distance);
@@ -156,13 +148,13 @@ if (navigator.geolocation) {
       const marker = L.marker([store.lat, store.lon])
         .addTo(map)
         .bindPopup(
-          `<b>Dick's Sporting Goods</b><br>${store.distance.toFixed(1)} km away`
+          `<b>${store.name}</b><br>${store.distance.toFixed(1)} km away`
         );
 
       const storeDiv = document.createElement("div");
       storeDiv.className = "store";
       storeDiv.innerHTML = `
-        <strong>Dick's Sporting Goods</strong><br>
+        <strong>${store.name}</strong><br>
         ${store.distance.toFixed(1)} km away
       `;
 
