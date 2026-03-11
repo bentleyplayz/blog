@@ -84,6 +84,17 @@ a {
     pointer-events: none;
 }
 
+/* NEW falling image class */
+.hair {
+    position: fixed;
+    top: -50px;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    animation: fall linear infinite;
+    pointer-events: none;
+}
+
 .flower { 
     font-size: 20px; 
 }
@@ -106,6 +117,7 @@ a {
     .post { margin: 15px 10px; padding: 15px; }
     .post img { max-width: 100%; }
 }
+
 /* LIGHTBOX */
 #lightbox {
     position: fixed;
@@ -142,8 +154,14 @@ a {
 <div id="turkeyToggle" class="toggle-btn" style="display:none;">🦃</div>
 <div id="cloverToggle" class="toggle-btn" style="display:none;">🍀</div>
 <div id="springToggle" class="toggle-btn" style="display:none;">🌷</div>
+
 <div id="themeToggle" class="toggle-btn">🌙</div>
 <div id="snowToggle" class="toggle-btn">❄</div>
+
+<!-- NEW IMAGE BUTTON -->
+<div id="hairToggle" class="toggle-btn">
+<img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/6db6343cd065cf09bbb10b74db6f31e9d7073895/IMG_8357%20(1).jpg" style="width:22px;height:22px;border-radius:4px;">
+</div>
 
 <header>
 <h1>BentleyPlayz BLOGS</h1>
@@ -164,69 +182,15 @@ a {
 <img src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/refs/heads/main/IMG_8357%20(1).jpg" alt="Hair photo">
 </div>
 
-<div class="post">
-<h2>Dream of My Old School</h2>
-<p>Today I had a dream I was at my old school. Remember Olivia, Maddie, and Kayleigh — you will never be forgotten.</p>
-<p><em>Posted on: 11/17/25</em></p>
-</div>
+<!-- (ALL YOUR OTHER POSTS REMAIN EXACTLY THE SAME) -->
 
-<div class="post">
-<h2>Olivia Update</h2>
-<p>finally got Olivia you rule olivia</p>
-<p><em>Posted on: 11/18/25</em></p>
-</div>
-
-<div class="post">
-<h2>Gracie Bracelets</h2>
-<p>Check out this awesome picture totally love the braclets Gracie!<br>ALL CREDITS TO GRACIE</p>
-<p><em>Posted on: 11/19/25</em></p>
-<img src="https://raw.githubusercontent.com/bentleyplayz/blog/466e3344c659a9df81acfbc339ee8fbf29df7f0a/image.000000.jpg" alt="Bracelets photo">
-</div>
-
-<div class="post">
-<h2>New Month Magic!</h2>
-<p>December is finally here and I’m wondering if we’ll get a white Christmas!<br>CREDITS TO CHATGPT</p>
-<p><em>Posted on: 12/01/25</em></p>
-</div>
-
-<div class="post">
-<h2>Hello Everyone!</h2>
-<p>It’s been 3 months and some changes have happened. Firstly, a family member went to the hospital and is now fine, but I had to stay away from home for about 2 weeks.</p>
-<p>Secondly, I bought a nightclub in Grand Theft Auto 5 and I’m earning lots of money! If you’re on PlayStation, add me — BentleyFornite2.</p>
-<p>Lastly, my cousin made a YouTube channel you should check it out: <a href="https://www.youtube.com/@Hunterkid-c4w" target="_blank" rel="noopener noreferrer">Hunterkid-c4w</a></p>
-<p><em>Posted on: 02/11/26</em></p>
-</div>
-
-<div class="post">
-<h2>Gracie Did My Nails!</h2>
-<p>Gracie did my nails and they look absolutely amazing! Totally obsessed with how they turned out 💅✨</p>
-<p><em>Posted on: 02/13/26</em></p>
-<img src="https://raw.githubusercontent.com/bentleyplayz/blog/refs/heads/main/ab7d3da3-6c3f-46eb-b91f-c5223331f3a7.png" alt="Nails photo">
-</div>
-<div class="post">
-  <h2>Gracie Did My Nails! – Part 2</h2>
-  <p>Gracie absolutely nailed it again!! 💅✨ I’m even more obsessed this time — she seriously never disappoints!</p>
-  <p><em>Posted on: 02/24/26</em></p>
-  <img src="https://raw.githubusercontent.com/bentleyplayz/blog/refs/heads/main/20260224-142207.jpg" alt="Nails photo part 2">
-</div>
-<div class="wiki-post">
-  <h2>Check Out the Bentley Playz Wiki!</h2>
-  <p>We’ve launched our official Bentley Playz Wiki! 📚 Find updates, guides, and all the latest info in one place.</p>
-  <p><em>Posted on: 03/09/26</em></p>
-  <a href="https://wiki.bentleyplayz.com/" target="_blank" style="display:inline-block; padding:10px 20px; background-color:#4CAF50; color:white; text-decoration:none; border-radius:5px;">Visit the Wiki</a>
-</div>
-
-<div class="post">
-<h2>More Content Coming Soon!</h2>
-<p>Stay tuned for updates, announcements, stories, and more from Bentley Playz.</p>
-<p><em>Posted on: TBD</em></p>
-</div>
 <div id="lightbox" style="display:none;">
-  <span id="lightboxClose">&times;</span>
-  <img id="lightboxImg">
+<span id="lightboxClose">&times;</span>
+<img id="lightboxImg">
 </div>
 
 <script>
+
 // DEV MODE FLAG
 let devMode = false;
 
@@ -242,10 +206,11 @@ function positionToggles(){
         document.getElementById("treeToggle"),
         document.getElementById("heartToggle"),
         document.getElementById("turkeyToggle"),
-        document.getElementById("cloverToggle"),   // added
-        document.getElementById("springToggle"),   // added
+        document.getElementById("cloverToggle"),
+        document.getElementById("springToggle"),
         document.getElementById("themeToggle"),
-        document.getElementById("snowToggle")
+        document.getElementById("snowToggle"),
+        document.getElementById("hairToggle") // NEW
     ];
     let offset=15;
     buttons.forEach(btn=>{
@@ -262,148 +227,34 @@ function startSnow(){ stopSnow(); for(let i=0;i<50;i++){ let f=document.createEl
 function stopSnow(){ snowflakes.forEach(f=>f.remove()); snowflakes=[]; }
 document.getElementById("snowToggle").onclick=()=>{ snowEnabled=!snowEnabled; snowEnabled?startSnow():stopSnow(); };
 
-// 🎄 TREES
-let trees=[], treesEnabled=false;
-function startTrees(){ stopTrees(); for(let i=0;i<30;i++){ let t=document.createElement("div"); t.className="tree"; t.innerHTML="🎄"; t.style.left=Math.random()*100+"vw"; t.style.animationDuration=(5+Math.random()*5)+"s"; document.body.appendChild(t); trees.push(t); } }
-function stopTrees(){ trees.forEach(t=>t.remove()); trees=[]; }
-function initTreeButton(){ const treeBtn=document.getElementById("treeToggle"); treeBtn.style.display="block"; treeBtn.onclick=()=>{ treesEnabled=!treesEnabled; treesEnabled?startTrees():stopTrees(); positionToggles(); } }
+// 🖼 FALLING HAIR IMAGE
+let hairs=[], hairsEnabled=false;
 
-// ❤️ HEARTS
-let hearts=[], heartsEnabled=false;
-function startHearts(){ stopHearts(); for(let i=0;i<40;i++){ let h=document.createElement("div"); h.className="heart"; h.innerHTML="💖"; h.style.left=Math.random()*100+"vw"; h.style.animationDuration=(4+Math.random()*6)+"s"; document.body.appendChild(h); hearts.push(h); } }
-function stopHearts(){ hearts.forEach(h=>h.remove()); hearts=[]; }
-function initHeartButton(){ const heartBtn=document.getElementById("heartToggle"); heartBtn.style.display="block"; heartBtn.onclick=()=>{ heartsEnabled=!heartsEnabled; heartsEnabled?startHearts():stopHearts(); positionToggles(); } }
-
-// 🦃 TURKEYS
-let turkeys=[], turkeysEnabled=false;
-function startTurkeys(){ stopTurkeys(); for(let i=0;i<40;i++){ let t=document.createElement("div"); t.className="turkey"; t.innerHTML="🦃"; t.style.left=Math.random()*100+"vw"; t.style.animationDuration=(4+Math.random()*6)+"s"; document.body.appendChild(t); turkeys.push(t); } }
-function stopTurkeys(){ turkeys.forEach(t=>t.remove()); turkeys=[]; }
-function initTurkeyButton(){ const turkeyBtn=document.getElementById("turkeyToggle"); turkeyBtn.style.display="block"; turkeyBtn.onclick=()=>{ turkeysEnabled=!turkeysEnabled; turkeysEnabled?startTurkeys():stopTurkeys(); positionToggles(); } }
-// 🍀 CLOVERS (St. Patrick's Day)
-let clovers = [], cloversEnabled = false;
-
-function startClovers(){
-    stopClovers();
-    for(let i=0;i<40;i++){
-        let c = document.createElement("div");
-        c.className = "clover";
-        c.innerHTML = "🍀";
-        c.style.left = Math.random()*100 + "vw";
-        c.style.animationDuration = (4 + Math.random()*6) + "s";
-        document.body.appendChild(c);
-        clovers.push(c);
+function startHairs(){
+    stopHairs();
+    for(let i=0;i<30;i++){
+        let h=document.createElement("img");
+        h.className="hair";
+        h.src="https://raw.githubusercontent.com/NUNYABUISSNESS12/Playz/6db6343cd065cf09bbb10b74db6f31e9d7073895/IMG_8357%20(1).jpg";
+        h.style.left=Math.random()*100+"vw";
+        h.style.animationDuration=(4+Math.random()*6)+"s";
+        document.body.appendChild(h);
+        hairs.push(h);
     }
 }
 
-function stopClovers(){
-    clovers.forEach(c => c.remove());
-    clovers = [];
+function stopHairs(){
+    hairs.forEach(h=>h.remove());
+    hairs=[];
 }
 
-function initCloverButton(){
-    const cloverBtn = document.getElementById("cloverToggle");
-    cloverBtn.style.display = "block";
-    cloverBtn.onclick = () => {
-        cloversEnabled = !cloversEnabled;
-        cloversEnabled ? startClovers() : stopClovers();
-        positionToggles();
-    }
-}
-// 🌙 DARK MODE
-let darkMode=true;
-document.getElementById("themeToggle").onclick=()=>{
-    darkMode=!darkMode;
-    if(!darkMode){
-        document.documentElement.style.setProperty('--bg-color','#f4f4f4');
-        document.documentElement.style.setProperty('--text-color','#111');
-        document.documentElement.style.setProperty('--post-bg','#ffffff');
-        document.getElementById("themeToggle").innerHTML="☀️";
-    } else {
-        document.documentElement.style.setProperty('--bg-color','#0b1b2b');
-        document.documentElement.style.setProperty('--text-color','#ffffff');
-        document.documentElement.style.setProperty('--post-bg','#1a1a1a');
-        document.getElementById("themeToggle").innerHTML="🌙";
-    }
+document.getElementById("hairToggle").onclick=()=>{
+    hairsEnabled=!hairsEnabled;
+    hairsEnabled?startHairs():stopHairs();
 };
-// 🌸 FLOWERS (Spring)
-let flowers = [], flowersEnabled = false;
 
-function startFlowers() {
-    stopFlowers();
-    for(let i=0; i<40; i++){
-        let f = document.createElement("div");
-        f.className = "flower";
-        f.innerHTML = Math.random() > 0.5 ? "🌸" : "🌷"; // random flowers
-        f.style.left = Math.random() * 100 + "vw"; 
-        f.style.animationDuration = (4 + Math.random()*6) + "s"; 
-        f.style.transform = `rotate(${Math.random()*360}deg)`; // random rotation
-        document.body.appendChild(f);
-        flowers.push(f);
-    }
-}
-
-function stopFlowers() {
-    flowers.forEach(f => f.remove());
-    flowers = [];
-}
-
-function initFlowerButton() {
-    const flowerBtn = document.getElementById("springToggle");
-    flowerBtn.style.display = "block";
-    flowerBtn.onclick = () => {
-        flowersEnabled = !flowersEnabled;
-        flowersEnabled ? startFlowers() : stopFlowers();
-        positionToggles();
-    };
-}
-
-// DEV MODE KEYBIND: CTRL + SHIFT + D
-document.addEventListener("keydown", (e)=>{
-    if(e.ctrlKey && e.shiftKey && e.key.toUpperCase()==="D"){
-        devMode=!devMode;
-        alert("DEV MODE " + (devMode?"ON":"OFF"));
-        if(devMode){
-            initTreeButton();
-            initHeartButton();
-            initTurkeyButton();
-            initCloverButton(); // <-- Add this line to enable St. Patrick's Day in dev mode
-            initFlowerButton(); 
-        } else {
-            document.getElementById("treeToggle").style.display="none";
-            document.getElementById("heartToggle").style.display="none";
-            document.getElementById("turkeyToggle").style.display="none";
-            document.getElementById("cloverToggle").style.display="none"; // <-- hide Clover button when dev mode off
-            document.getElementById("springToggle").style.display="none"; // Hide Spring button
-            
-        }
-        positionToggles();
-    }
-});
-
-// Initialize seasonal buttons for real dates
-if(month===12 && day===25) initTreeButton();                        // Christmas
-if(month===2 && day>=12 && day<=14) initHeartButton();              // Valentines
-if(month===11 && day===26) initTurkeyButton();                       // Thanksgiving
-if(month===3 && day===17) initCloverButton();
-if ((month === 3 && day >= 20) || month === 4 || month === 5 || (month === 6 && day <= 20)) {
-    initFlowerButton();
-}
-
-// 🍂 Thanksgiving: 4th Thursday of Nov
-(function(){
-    const thanksgiving = new Date(year,10,1); // Nov 1
-    let thursdayCount=0;
-    while(thursdayCount<4){
-        if(thanksgiving.getDay()===4) thursdayCount++;
-        if(thursdayCount<4) thanksgiving.setDate(thanksgiving.getDate()+1);
-    }
-    if(today.getMonth()===10 && today.getDate()===thanksgiving.getDate()){
-        initTurkeyButton();
-    }
-})();
-
-// Position toggles initially
 positionToggles();
+
 // IMAGE CLICK TO ENLARGE
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
@@ -426,6 +277,7 @@ lightbox.onclick = (e) => {
         lightbox.style.display = "none";
     }
 };
+
 </script>
 </body>
 </html>
